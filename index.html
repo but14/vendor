@@ -92,12 +92,12 @@
       <!-- Tab buttons -->
       <div class="border-b border-gray-200 mb-6">
         <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
-          <button
+          <!-- <button
             class="tab-btn active text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm"
             data-tab="tab0"
           >
             0. Hướng dẫn
-          </button>
+          </button> -->
           <button
             class="tab-btn text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm"
             data-tab="tab1"
@@ -157,7 +157,7 @@
 
       <!-- Tab content -->
       <div id="tab-container" class="overflow-x-auto">
-        <div id="tab0" class="tab-content active prose max-w-none">
+        <!-- <div id="tab0" class="tab-content active prose max-w-none">
           <h3 class="font-semibold">0. Hướng dẫn sử dụng và chú giải</h3>
           <p>
             <strong>Mục đích:</strong> Công cụ này giúp đánh giá, so sánh và lựa
@@ -182,7 +182,7 @@
               Sau khi hoàn tất, nhấn nút "Xuất ra Excel" để tải về file báo cáo.
             </li>
           </ol>
-        </div>
+        </div> -->
 
         <div id="tab1" class="tab-content">
           <h3 class="font-semibold mb-2">
@@ -663,19 +663,27 @@
             "11.000.000 Vnd",
             "",
           ],
-          ["Ghi chú", "", "", "Phí/năm", ""],
+          [
+            "Ghi chú",
+            "Bán giải pháp, sở hữu trọn đời",
+            "Bán giải pháp, sở hữu trọn đời",
+            "Cho thuê tính Phí/năm",
+            "",
+          ],
         ],
         "table-6": [
           ["Hạng mục", "Arito", "Diginet", "Ecount", "FPT"],
-          ["Mục 1", "6 bước", "6 bước", "6 bước", "6 bước"],
-          ["Mục 2", "có", "có", "có", "có"],
-          ["Mục 3", "2h", "2h", "2h", "2h"],
+          ["Quy trình triển khai", "", "", "", ""],
+          ["Kinh nghiệm đội ngũ", "", "", "", ""],
+          ["Cam kết SLA", "", "", "", ""],
         ],
         "table-7": [
           ["Loại rủi ro", "Arito", "Diginet", "Ecount", "FPT"],
-          ["Mục 1", "Không", "Không", "Không", "Không"],
-          ["Mục 2", "Không", "Không", "Không", "Không"],
-          ["Mục 3", "Không", "Không", "Không", "Không"],
+          ["Rủi ro tài chính", "Trung bình - công ty nội địa, phụ thuộc vào số lượng người sử dụng", "Cao - chi phí đầu tư ban đầu lớn", "Thấp - mô hình thuê bao, chi phí thấp", ""],
+          ["Rủi ro vận hành", "", "", "", ""],
+          ["Rủi ro kỹ thuật", "Trung bình - rào cản về nền tảng kỹ thuật, ảnh hưởng đến độ tùy biến của giải pháp", "Trung bình - rào cản về nền tảng kỹ thuật, ảnh hưởng đến độ tùy biến của giải pháp", "Thấp - Hệ thống SaaS cập nhật liên tục", ""],
+          ["Rủi ro pháp lý", "Thấp - Hợp đồng rõ ràng, tuân thủ các quy định của nhà nước", "Thấp - Hợp đồng rõ ràng, tuân thủ các quy định của nhà nước", "Trung bình - Công ty nước ngoài", ""],
+          ["Rủi ro bảo mật", "Trung bình - cần kiểm tra kỹ lưỡng về tiêu chuẩn bảo mật, cấu hình triển khai", "Trung bình - cần kiểm tra kỹ lý về tiêu chuần bảo mật, cấu hình triển khai", "Cao - lưu dữ liệu tại Cloud nước ngoài", ""],
         ],
         "table-9": [
           ["Phân tích", "Arito", "Diginet", "Ecount", "FPT"],
