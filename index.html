@@ -734,10 +734,10 @@
           // ["1. Phí cài đặt, khởi tạo (Setup Fee)"],
           [
             "TỔNG CHI PHÍ SỞ HỮU (TCO)",
-            "359.000.000 Vnd",
-            "1.541.729.000 Vnd",
-            "11.000.000 Vnd",
-            "",
+            "359.000.000 VND",
+            "1.541.729.000 VND",
+            "11.000.000 VND",
+            "500.000.000 VND",
           ],
           [
             "Ghi chú",
@@ -888,7 +888,8 @@
             tcoValues["Ecount"] =
               (parseFloat(String(costData[1][3]).replace(/[^0-9]/g, "")) || 0) *
               3;
-            importedData["table-5"][1][3] = tcoValues["Ecount"]; // Update the data object
+            importedData["table-5"][1][3] =
+              tcoValues["Ecount"].toLocaleString("vi-VN") + " VND"; // Thêm lại chữ VND
           }
 
           const validTcos = Object.values(tcoValues).filter((tco) => tco > 0);
