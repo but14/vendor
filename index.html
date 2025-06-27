@@ -883,14 +883,14 @@
             tcoValues[vendors[index]] = cleanVal;
           });
 
-          const ecountNote = costData[2][3];
-          if (ecountNote.includes("Phí/năm")) {
-            tcoValues["Ecount"] =
-              (parseFloat(String(costData[1][3]).replace(/[^0-9]/g, "")) || 0) *
-              3;
-            importedData["table-5"][1][3] =
-              tcoValues["Ecount"].toLocaleString("vi-VN") + " VND"; // Thêm lại chữ VND
-          }
+          // const ecountNote = costData[2][3];
+          // if (ecountNote.includes("Phí/năm")) {
+          //   tcoValues["Ecount"] =
+          //     (parseFloat(String(costData[1][3]).replace(/[^0-9]/g, "")) || 0) *
+          //     3;
+          //   importedData["table-5"][1][3] =
+          //     tcoValues["Ecount"].toLocaleString("vi-VN") + " VND"; // Thêm lại chữ VND
+          // }
 
           const validTcos = Object.values(tcoValues).filter((tco) => tco > 0);
           if (validTcos.length < 2) {
