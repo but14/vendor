@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>So sánh Nhà cung cấp Giải pháp mua hàng (Cải tiến)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+    }
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 8px;
+      vertical-align: top;
+      text-align: center;
+    }
+    th {
+      background-color: #f8fafc;
+      font-weight: 600;
+      text-align: left;
+    }
+    td:first-child, th:first-child {
+      text-align: left;
+    }
+    td {
+      background-color: #ffffff;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .tab-btn.active {
+      border-color: #2563eb;
+      color: #2563eb;
+      font-weight: 600;
+    }
+    td[contenteditable="true"] {
+      background-color: #fefce8;
+    }
+    td[contenteditable="true"]:focus {
+      outline: 2px solid #3b82f6;
+      background-color: #ffffff;
+    }
+    .chart-container {
+      border: 1px solid #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      background-color: #fff;
+    }
+    .prose ol, .prose ul {
+      margin-left: 1rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 p-4 sm:p-6 md:p-8">
+  <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-lg p-6">
+    <!-- Header Section -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">So sánh Nhà cung cấp Giải pháp Mua hàng (Cải tiến)</h1>
+        <p class="mt-1 text-gray-500">Dữ liệu được nhập và tính điểm tự động. Xem biểu đồ ở Dashboard và xuất ra file Excel.</p>
+      </div>
+      <button id="export-btn" class="mt-4 sm:mt-0 w-full sm:w-auto bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 10-1.09-1.03l-2.905 3.079V2.75z" />
+          <path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
+        </svg>
+        Xuất ra Excel
+      </button>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="border-b border-gray-200 mb-6">
+      <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
+        <button class="tab-btn active text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm" data-tab="tab0">0. Chú thích</button>
+        <button class="tab-btn text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm" data-tab="tab1">1. Thông tin chung</button>
+        <button class="tab-btn text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm" data-tab="tab2">2. Chấm điểm</button>
+        <button class="tab-btn text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm" data-tab="tab3">3. Checklist tính năng</button>
+        <button class="tab-btn text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm" data-tab="tab4">4. Công nghệ</button>
+        <button class="tab-btn text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm" data-tab="tab5">5. Chi phí</button>
+        <button class="tab-btn text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm" data-tab="tab6">6. Hỗ trợ</button>
+        <button class="tab-btn text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm" data-tab="tab7">7. Rủi ro</button>
+        <button class="tab-btn text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm" data-tab="tab8">8. Dashboard</button>
+        <button class="tab-btn text-gray-600 hover:text-blue-600 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm" data-tab="tab9">9. SWOT</button>
+      </nav>
+    </div>
+
+    <!-- Tab Content -->
+    <div id="tab-container" class="overflow-x-auto">
+      <!-- Tab 0: Instructions -->
+      <div id="tab0" class="tab-content active prose max-w-none">
+        <h3 class="font-semibold">0. Sử dụng và chú giải</h3>
+        <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <h4 class="font-bold text-blue-800">Cập nhật & Ghi chú quan trọng</h4>
+          <ul class="list-disc list-inside mt-2 text-sm text-gray-700 space-y-1">
+            <li><strong>Bảng chấm điểm (Tab 2) được thiết kế lại để rõ ràng hơn:</strong> Hiển thị "Điểm Trung bình" (thang 10) và "Đ Ascending"Điểm Trọng số" (cho thấy đóng góp vào tổng điểm 100) cho từng hạng mục và nhà cung cấp.</li>
+            <li>
+              <strong>Tự động hóa tính điểm:</strong>
+              <ul class="list-['-_'] list-inside pl-4">
+                <li>Điểm <strong>"A. Tính năng & Nghiệp vụ"</strong> được tự động tính trung bình dựa trên mức độ đáp ứng trong "3. Checklist tính năng".</li>
+                <li>Điểm <strong>"C1. Tổng chi phí sở hữu (TCO) 3 năm"</strong> được tự động tính bằng cách so sánh dữ liệu TCO từ "5. Chi phí" (điểm cao hơn cho chi phí thấp hơn).</li>
+              </ul>
+            </li>
+            <li><strong>Khả năng tùy chỉnh:</strong> Các ô điểm trung bình (nền vàng) vẫn có thể <strong>chỉnh sửa thủ công</strong>. Bảng sẽ tự động tính toán lại khi bạn thay đổi điểm.</li>
+            <li><strong>Các mục khác:</strong> Điểm cho "Công nghệ", "Hỗ trợ" vẫn cần nhập thủ công do dữ liệu ở các tab tương ứng chưa đủ chi tiết để chấm điểm tự động.</li>
+          </ul>
+        </div>
+        <p class="mt-4"><strong>Mục đích:</strong> Công cụ này giúp đánh giá, so sánh và lựa chọn nhà cung cấp giải pháp phê duyệt mua hàng điện tử một cách có hệ thống.</p>
+      </div>
+
+      <!-- Tab 1: General Information -->
+      <div id="tab1" class="tab-content">
+        <h3 class="font-semibold mb-2">1. Thông tin chung về nhà cung cấp và giải pháp</h3>
+        <table id="table-1" class="w-full text-sm"></table>
+      </div>
+
+      <!-- Tab 2: Scoring -->
+      <div id="tab2" class="tab-content">
+        <h3 class="font-semibold mb-2">2. Bảng Chấm Điểm Chi Tiết</h3>
+        <table id="table-2" class="w-full text-sm"></table>
+      </div>
+
+      <!-- Tab 3: Feature Checklist -->
+      <div id="tab3" class="tab-content">
+        <h3 class="font-semibold mb-2">3. Danh mục kiểm tra tính năng chi tiết</h3>
+        <table id="table-3" class="w-full text-sm"></table>
+      </div>
+
+      <!-- Tab 4: Technology -->
+      <div id="tab4" class="tab-content">
+        <h3 class="font-semibold mb-2">4. Chi tiết về công nghệ</h3>
+        <table id="table-4" class="w-full text-sm"></table>
+      </div>
+
+      <!-- Tab 5: Cost -->
+      <div id="tab5" class="tab-content">
+        <h3 class="font-semibold mb-2">5. Chi tiết chi phí (ước tính trong 3 năm)</h3>
+        <table id="table-5" class="w-full text-sm"></table>
+      </div>
+
+      <!-- Tab 6: Support -->
+      <div id="tab6" class="tab-content">
+        <h3 class="font-semibold mb-2">6. Thông tin về hỗ trợ và triển khai</h3>
+        <table id="table-6" class="w-full text-sm"></table>
+      </div>
+
+      <!-- Tab 7: Risk -->
+      <div id="tab7" class="tab-content">
+        <h3 class="font-semibold mb-2">7. Đánh giá rủi ro tiềm ẩn</h3>
+        <table id="table-7" class="w-full text-sm"></table>
+      </div>
+
+      <!-- Tab 8: Dashboard -->
+      <div id="tab8" class="tab-content">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="font-semibold text-xl">8. Dashboard - Bảng điều khiển Trực quan</h3>
+          <button id="update-charts-btn" class="bg-green-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-700 transition duration-300 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201-4.46_5.5 5.5 0 011.643-1.644l.11-.112a.75.75 фил0 011.06 1.06l-.11.112a4 4 0 00-1.196 1.196 4.002 4.002 0 006.585 3.235l.233.233A5.5 5.5 0 0115.312 11.424zM18.75 13a.75.75 0 01-.75.75h-3.5a.75.75 0 010-1.5h2.323l-3.3-3.3a.75.75 0 111.06-1.06l3.3 3.3V8.5a.75.75 0 011.5 0v3.75c0 .414-.336.75-.75.75z" clip-rule="evenodd" />
+            </svg>
+            Cập nhật Biểu đồ & Bảng
+          </button>
+        </div>
+        <p class="text-sm text-gray-500 mb-6">Dữ liệu đã được nhập. Nhấn nút này để xem kết quả phân tích.</p>
+        <div class="space-y-8">
+          <div class="chart-container">
+            <h4 class="font-bold text-center mb-4">Bảng xếp hạng tổng thể</h4>
+            <table id="table-8" class="w-full text-sm"></table>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="chart-container">
+              <h4 class="font-bold text-center mb-2">So sánh Tính năng (Thang điểm 10)</h4>
+              <canvas id="featureChart"></canvas>
+            </div>
+            <div class="chart-container">
+              <h4 class="font-bold text-center mb-2">So sánh Công nghệ (Thang điểm 10)</h4>
+              <canvas id="techChart"></canvas>
+            </div>
+            <div class="chart-container">
+              <h4 class="font-bold text-center mb-2">So sánh Chi phí (Thang điểm 10)</h4>
+              <canvas id="costChart"></canvas>
+            </div>
+            <div class="chart-container">
+              <h4 class="font-bold text-center mb-2">So sánh Hỗ trợ (Thang điểm 10)</h4>
+              <canvas id="supportChart"></canvas>
+            </div>
+            <div class="chart-container col-span-2">
+              <h4 class="font-bold text-center mb-2">Tổng điểm các Nhà cung cấp (Thang 10)</h4>
+              <canvas id="totalScoreChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 9: SWOT -->
+      <div id="tab9" class="tab-content">
+        <h3 class="font-semibold mb-2">9. Phân tích SWOT</h3>
+        <table id="table-9" class="w-full text-sm"></table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data imported from user's files
+    const importedData = {
+      "table-1": [
+        ["Hạng mục", "Arito", "Diginet", "Ecount", "FPT"],
+        ["Tên công ty", "Công ty Cổ phần Giải pháp Công nghệ Arito", "Công ty Cổ phần Diginet", "Công ty TNHH Ecount", "Công ty TNHH FPT IS"],
+        ["Tên giải pháp/sản phẩm", "AritoERP", "DiginetERP", "EcountERP", "Procuva"],
+        ["Website", "arito.vn", "diginet.com.vn", "www.ecount.com", "fpt-is.com"],
+        ["Người liên hệ chính", "IT Application", "IT Application", "IT Application", "IT Application"],
+      ],
+      "table-2": [
+        ["Tiêu chí đánh giá", "Trọng số (%)", "Arito (Điểm /10)", "Diginet(Điểm /10)", "Ecount (Điểm /10)", "FPT (Điểm /10)"],
+        ["A. TÍNH NĂNG & NGHIỆP VỤ", 40, 8.75, 8.5, 7.75, 0],
+        ["1. Quản lý Yêu cầu mua hàng (PR)", 10, 8, 8, 8, 0],
+        ["2. Cấu hình luồng phê duyệt", 15, 9, 9, 8, 0],
+        ["3. Quản lý Đơn đặt hàng (PO) & NCC", 5, 9, 8, 7, 0],
+        ["4. Báo cáo & Phân tích", 10, 9, 9, 8, 0],
+        ["B. CÔNG NGHỆ & TÍCH HỢP", 25, 8.6, 8.2, 8, 0],
+        ["1. Khả năng tích hợp (ERP, Kế toán...)", 15, 9, 8, 8, 9],
+        ["2. Bảo mật & Phân quyền", 5, 9, 9, 8, 9],
+        ["3. Nền tảng & Khả năng mở rộng", 5, 8, 8, 8, 8],
+        ["C. CHI PHÍ", 20, 8, 8, 8.5, 0],
+        ["1. Tổng chi phí sở hữu (TCO) 3 năm", 15, 10, 6, 8, 0],
+        ["2. Mô hình định giá & sự minh bạch", 5, 8, 8, 10, 0],
+        ["D. HỖ TRỢ & TRIỂN KHAI", 15, 8.67, 8.33, 8.33, 0],
+        ["1. Chất lượng hỗ trợ (SLA)", 5, 9, 8, 7, 0],
+        ["2. Năng lực & Quy trình triển khai", 10, 9, 8.5, 8.5, 0],
+        ["TỔNG CỘNG", 100, 8.54, 8.33, 8.04, 0],
+      ],
+      "table-3": [
+        ["Nhóm tính năng", "Tính năng cụ thể", "Yêu cầu chi tiết", "Arito", "Diginet", "Ecount", "FPT"],
+        ["QUẢN LÝ YÊU CẦU MUA HÀNG", "Tạo mới/Cập nhật/Xóa/Copy yêu cầu mua hàng", "Cho phép người dùng tạo mới, cập nhật thông tin, xóa hoặc sao chép một yêu cầu mua hàng đã có để tạo một yêu cầu mới. Hệ thống cung cấp form nhập liệu ĐNMH đơn giản, giữ lại các trường cơ bản theo chuẩn form mẫu ĐNMH. Người dùng có thể tải dữ liệu ĐNMH từ file Excel lên hệ thống.", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Đáp ứng"],
+        ["", "Chuẩn hóa dữ liệu hàng hóa", "Mã hàng và tên hàng trong ĐNMH được ràng buộc và chọn từ danh sách hàng hóa chuẩn có sẵn trong hệ thống. Hệ thống không cho phép nhập mã hàng/tên hàng tự do, đảm bảo tuân thủ chuẩn dữ liệu. Quyền tạo và duyệt mã hàng hóa mới được phân quyền cho một số người dùng nhất định.", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Đáp ứng"],
+        ["", "Quản lý ngày cần hàng", "Mỗi ĐNMH có ngày cần hàng tổng thể, được tính là ngày cần hàng sớm nhất trong danh sách các mặt hàng. ĐNMH bình thường tuân theo leadtime tiêu chuẩn, không lưu được nếu ngày giao hàng sớm hơn leadtime. ĐNMH gấp pass leadtime nhưng có giới hạn ngày giao hàng tối thiểu, yêu cầu diễn giải nguyên nhân. Báo cáo tháng thống kê trường hợp gấp.", "Đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng", "Đáp ứng"],
+        ["", "Gộp yêu cầu mua hàng", "Trong một timeframe quy định, các PR tương tự có thể được gộp thành một PR tổng.", "Đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng", "Đáp ứng"],
+        ["", "Tạo PR tự động theo chu kỳ", "Hệ thống tự động tạo PR theo chu kỳ, nhắc nhở và gợi ý để người dùng quyết định tiếp tục PR hay không.", "Đáp ứng", "Đáp ứng", "Chưa đáp ứng", "Đáp ứng"],
+        ["", "Kiểm tra an toàn tồn kho", "Hệ thống kiểm tra an toàn tồn kho để đề xuất mua hàng.", "Đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng"],
+        ["", "Điều chỉnh hạn mức phê duyệt", "Định kỳ 3 tháng/lần, hệ thống khuyến nghị điều chỉnh hạn mức phê duyệt để đơn giản hóa quy trình.", "Đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng", "Đáp ứng"],
+        ["", "Hỗ trợ tiền tệ và tỷ giá", "Bổ sung cột tiền tệ gốc của mặt hàng, cột tỷ giá tham chiếu theo tỷ giá trên website Ngân hàng. Trường 'Ngoại tệ' đổi tên thành 'Tiền tệ'.", "Đáp ứng", "Đáp ứng", "Đáp ứng một phần", "Đáp ứng"],
+        ["", "Đề xuất đơn giá", "Hệ thống tự động đề xuất đơn giá dựa trên đơn giá gần nhất +8%, người dùng có thể điều chỉnh trong phạm vi kiểm soát theo quyền truy cập.", "Đáp ứng", "Đáp ứng một phần ", "Chưa đáp ứng", "Đáp ứng một phần"],
+        ["", "Phân quyền theo công ty", "Hỗ trợ phân quyền người dùng theo công ty, chỉ được truy cập dữ liệu công ty được phân quyền.", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Đáp ứng"],
+        ["", "Quy định thao tác ĐNMH", "Người dùng thông thường không được chỉnh sửa, hủy hoặc đóng ĐNMH sau khi duyệt. Chỉ tài khoản quản trị hoặc phân quyền đặc biệt được thực hiện.", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Đáp ứng"],
+        ["", "Xuất báo cáo ĐNMH", "Báo cáo thể hiện thời gian phê duyệt từng cấp, hỗ trợ định dạng Excel, PDF và trực tuyến.", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Đáp ứng"],
+        ["", "Phê duyệt yêu cầu mua hàng", "Hỗ trợ ủy quyền phê duyệt, yêu cầu ủy quyền phải được cấp trên phê duyệt. Giao diện phê duyệt thể hiện comment, lịch sử duyệt/hủy, avatar theo cấp bậc, cụ thể hóa cấp độ chức danh, chèn chữ ký phê duyệt (hình ảnh hoặc dấu tick).", "Đáp ứng", "Đáp ứng một phần", "Chưa đáp ứng", "Đáp ứng"],
+        ["", "Tự động luân chuyển yêu cầu", "Tự động luân chuyển ĐNMH qua các cấp phê duyệt theo cấu hình quy trình, ghi nhận lịch sử, phản hồi lý do từ chối, thông báo qua email/mobile.", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Đáp ứng"],
+        ["QUẢN LÝ ĐỀ NGHỊ BÁO GIÁ", "Lập đề nghị báo giá (RFQ)", "Hỗ trợ đổ dữ liệu từ ĐNMH sang RFQ, bao gồm mã hàng, tên hàng, số lượng, đơn vị tính, thời gian cần hàng. RFQ bao gồm MOQ, điều kiện thanh toán, đơn giá chào.", "Đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng", "Đáp ứng"],
+        ["", "Tạo mới nhà cung cấp", "Cho phép tạo NCC mới qua biểu mẫu chuẩn, tự động kiểm tra thông tin từ MST. NCC mới cần phê duyệt trước khi sử dụng.", "Đáp ứng", "Đáp ứng", "Đáp ứng một phần", "Đáp ứng"],
+        ["", "Cập nhật pháp lý", "Hiển thị tab thông báo cập nhật phần mềm theo quy định pháp luật hiện hành.", "Đáp ứng", "Đáp ứng", "Chưa đáp ứng", "Đáp ứng"],
+        ["", "Gửi báo giá qua email", "Gửi RFQ trực tiếp từ hệ thống qua email NCC.", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Đáp ứng"],
+        ["QUẢN LÝ SO SÁNH GIÁ", "Lập bảng so sánh giá", "Hỗ trợ tối đa 6 NCC, hiển thị đơn giá gốc, tỷ giá, đơn giá quy đổi VND. Cho phép chọn NCC theo line item, đề xuất NCC tối ưu, hiển thị trạng thái HĐNT. Phê duyệt có Approve/Reject, Reject yêu cầu lý do.", "Đáp ứng", "Đáp ứng một phần", "Đáp ứng một phần", "Đáp ứng"],
+        ["", "Đồng bộ ngôn ngữ", "Giao diện tất cả tác vụ đồng bộ tiếng Việt.", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Đáp ứng"],
+        ["", "Chuẩn hóa Payment term", "Chuẩn hóa Payment term (Thanh toán trước/sau trong vòng X ngày làm việc kể từ...).", "Đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng", "Đáp ứng một phần"],
+        ["", "Hiển thị tổng tiền", "Thêm tên NCC vào cột tổng tiền để dễ nhận diện.", "Đáp ứng", "Đáp ứng một phần", "Chưa đáp ứng", "Đáp ứng một phần"],
+        ["", "Tìm kiếm báo giá", "Tìm kiếm các báo giá liên quan để tra soát giá cũ/mới.", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Chưa đáp ứng"],
+        ["", "Phê duyệt linh hoạt", "Thêm phương án click khi phê duyệt để tăng kiểm soát nội dung.", "Đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng", "Đáp ứng một phần"],
+        ["QUẢN LÝ HỢP ĐỒNG", "Quản lý hợp đồng", "Cho phép upload và trình duyệt hợp đồng. HĐNT không cần so sánh giá. HĐ từ so sánh giá yêu cầu dữ liệu tham chiếu từ SSG, theo dõi tiến độ thực hiện (số lượng pending, hiệu lực HĐ).", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Đáp ứng"],
+        ["QUẢN LÝ ĐƠN ĐẶT HÀNG", "Lập và phê duyệt PO", "Tự động luân chuyển dữ liệu từ so sánh giá sang PO, sử dụng mẫu đơn giản. Hỗ trợ chữ ký số và chữ ký hình ảnh.", "Đáp ứng", "Đáp ứng", "Đáp ứng", "Đáp ứng"],
+        ["QUẢN LÝ NHẬP KHO", "Quy trình nhập kho", "Ghi nhận số lượng nhận, đối chiếu chứng từ, lưu trữ biên bản giao nhận và hóa đơn.", "Đáp ứng", "Chưa đáp ứng", "Đáp ứng", "Chưa đáp ứng"],
+        ["QUẢN LÝ THANH TOÁN", "Lập và phê duyệt đề nghị thanh toán", "Nhập hóa đơn, số tiền, NCC. Hệ thống đề xuất tài khoản nhận thanh toán theo NCC, cho phép kiểm tra/cập nhật thông tin tài khoản.", "Đáp ứng", "Đáp ứng một phần", "Đáp ứng một phần", "Đáp ứng"],
+        ["QUY TRÌNH NGHIỆP VỤ", "Hiển thị quy trình", "Cho phép user mapping quy trình nghiệp vụ, hiển thị flow từ PR → RFQ → So sánh → PO → Nhập kho → Thanh toán. Tất cả user có thể xem flow để kiểm soát chéo.", "Đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng"],
+        ["BÁO CÁO & PHÂN TÍCH", "Báo cáo chi phí mua hàng", "Phân tích chi phí theo đơn vị, loại hàng, thời gian, nhà cung cấp. Hỗ trợ lọc theo tiêu chí tùy chỉnh.", "Đáp ứng", "Đáp ứng một phần", "Đáp ứng", "Chưa đáp ứng"],
+        ["", "Dự báo nhu cầu mua hàng", "Áp dụng thuật toán phân tích lịch sử tiêu dùng để dự báo nhu cầu trong tương lai.", "Chưa đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng", "Chưa đáp ứng"],
+      ],
+      "table-4": [
+        ["Hạng mục", "Arito", "Diginet", "Ecount", "FPT"],
+        ["Ngôn ngữ lập trình", "C#, .NET", "C#, .NET, JS, NodeJS", "C++, C#, JS", "C#, .NET"],
+        ["Cơ sở dữ liệu", "SQL Server", "Redis, MongoDB, SQL Server", "SQL Server, MariaDB", "SQL Server"],
+        ["Kiến trúc hệ thống", "Cloud-based: tích hợp dịch vụ website và mobile", "Web/Mobile, Winform", "Cloud-based: tích hợp dịch vụ website và mobile", "Cloud-based: tích hợp dịch vụ website và mobile"],
+        ["Ứng dụng di động", "Android/iOS", "Android/iOS", "Android/iOS", "Android/iOS"],
+      ],
+      "table-5": [
+        ["Khoản mục chi phí", "Arito", "Diginet", "Ecount", "FPT"],
+        ["TỔNG CHI PHÍ SỞ HỮU (TCO)", "359.000.000 VND", "1.541.729.000 VND", "11.000.000 VND", "Chưa báo giá"],
+        ["Ghi chú", "Bán giải pháp, sở hữu trọn đời. Đã bao gồm chi phí Customization.", "Bán giải pháp, sở hữu trọn đời. Đã bao gồm chi phí Customization.", "Cho thuê tính Phí/năm", "Bên cung cấp chưa cung cấp thông tin chi tiết."],
+      ],
+      "table-6": [
+        ["Hạng mục", "Arito", "Diginet", "Ecount", "FPT"],
+        ["Quy trình triển khai", "", "", "", ""],
+        ["Đào tạo người dùng", "", "", "", ""],
+        ["Cam kết thời gian phản hồi (SLA)", "", "", "", ""],
+      ],
+      "table-7": [
+        ["Loại rủi ro", "Arito", "Diginet", "Ecount", "FPT"],
+        ["Rủi ro tài chính", "Trung bình - công ty nội địa, phụ thuộc vào số lượng người sử dụng", "Cao - chi phí đầu tư ban đầu lớn", "Thấp - mô hình thuê bao, chi phí thấp", "Trung bình - chi phí triển khai cao ban đầu nhưng đơn vị phát triển lớn, uy tín"],
+        ["Rủi ro vận hành", "Cao - Chưa rõ thông tin đội ngũ vận hành, hệ thống phức tạp, cần nhiều nhân sự triển khai, tài liệu rõ ràng", "Cao - Chưa rõ thông tin đội ngũ vận hành, hệ thống phức tạp, cần nhiều nhân sự triển khai, tài liệu rõ ràng", "Cao - Chưa rõ thông tin đội ngũ vận hành, hệ thống phức tạp, cần nhiều nhân sự triển khai, tài liệu rõ ràng", "Thấp - đội ngũ triển khai và hỗ trợ vận hành chuyên nghiệp, quy trình rõ ràng"],
+        ["Rủi ro kỹ thuật", "Trung bình - rào cản về nền tảng kỹ thuật, ảnh hưởng đến độ tùy biến của giải pháp", "Trung bình - rào cản về nền tảng kỹ thuật, ảnh hưởng đến độ tùy biến của giải pháp", "Thấp - Hệ thống SaaS cập nhật liên tục", "Thấp - nền tảng do FPT phát triển, dễ tích hợp với hệ sinh thái công nghệ trong nước"],
+        ["Rủi ro pháp lý", "Thấp - Hợp đồng rõ ràng, tuân thủ các quy định của nhà nước", "Thấp - Hợp đồng rõ ràng, tuân thủ các quy định của nhà nước", "Trung bình - Công ty nước ngoài", "Thấp - Doanh nghiệp Việt Nam, tuân thủ quy định pháp lý nội địa"],
+        ["Rủi ro bảo mật", "Trung bình - cần kiểm tra kỹ lưỡng về tiêu chuẩn bảo mật, cấu hình triển khai", "Trung bình - cần kiểm tra kỹ lưỡng về tiêu chuẩn bảo mật, cấu hình triển khai", "Cao - lưu dữ liệu tại Cloud nước ngoài", "Trung bình - cần kiểm tra kỹ lưỡng về tiêu chuẩn bảo mật, cấu hình triển khai"],
+      ],
+      "table-9": [
+        ["Phân tích", "Arito", "Diginet", "Ecount", "FPT"],
+        ["Strengths (Điểm mạnh)", "Năng lực toàn diện vượt trội (điểm tổng cao nhất).\nDẫn đầu về Tính năng & Hỗ trợ.\nCông nghệ tốt, nền tảng vững chắc.", "Tỷ lệ Hiệu năng/Chi phí xuất sắc.\nNăng lực cân bằng và toàn diện.\nChi phí cạnh tranh.", "Tỷ lệ Hiệu năng/Chi phí xuất sắc.\nNăng lực cân bằng và toàn diện.\nChi phí cạnh tranh nhất.", "Thương hiệu mạnh, uy tín trên thị trường."],
+        ["Weaknesses (Điểm yếu)", "Chi phí cao.\nTỷ lệ Hiệu năng/Chi phí chưa tối ưu.", "Chi phí rất cao. Cao nhất trong số các nhà cung cấp. Không phải lựa chọn mạnh nhất về tính năng so với Arito.\nThương hiệu có thể không mạnh bằng.", "Thấp điểm hơn Diginet một chút về tính năng.\nThương hiệu có thể không mạnh bằng.", "Không có dữ liệu để so sánh, không tham gia đánh giá."],
+        ["Opportunities (Cơ hội)", "Phù hợp với doanh nghiệp lớn, ưu tiên tính năng trên hết.\nTiềm năng trở thành đối tác chiến lược dài hạn.", "Lựa chọn hàng đầu cho số đông doanh nghiệp (vừa và lớn).", "Lựa chọn hàng đầu cho các doanh nghiệp ưu tiên về ngân sách.\nCó thể thắng thầu nhờ chi phí cực kỳ cạnh tranh.", "Nếu tham gia và cung cấp giải pháp tốt, có thể tận dụng uy tín thương hiệu để chiếm lĩnh thị trường."],
+        ["Threats (Thách thức)", "Áp lực cạnh tranh từ các NCC giá tốt (Ecount).", "Cạnh tranh về giá.\nKhó cạnh tranh ở phân khúc cao cấp nhất.", "Có thể bị xem là lựa chọn 'giá rẻ' thay vì 'chất lượng'.", "Bị loại khỏi quy trình lựa chọn do không cung cấp thông tin."],
+      ],
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      let charts = {};
+
+      // --- Auto-Scoring Functions ---
+      function autoScoreFeatures() {
+        const featureData = importedData["table-3"].slice(1);
+        const vendors = ["Arito", "Diginet", "Ecount", "FPT"];
+        const vendorScores = { Arito: [], Diginet: [], Ecount: [], FPT: [] };
+        const scoreMap = {
+          "Đáp ứng": 10,
+          "Đáp ứng một phần": 5,
+          "Đáp ứng một phần ": 5,
+          "Chưa đáp ứng": 0,
+          "": 0,
+        };
+
+        featureData.forEach(row => {
+          vendors.forEach((vendor, index) => {
+            const status = row[index + 3];
+            vendorScores[vendor].push(scoreMap[status] !== undefined ? scoreMap[status] : 0);
+          });
+        });
+
+        const averageScores = {};
+        vendors.forEach(vendor => {
+          const scores = vendorScores[vendor];
+          const total = scores.reduce((sum, score) => sum + score, 0);
+          averageScores[vendor] = parseFloat((scores.length > 0 ? total / scores.length : 0).toFixed(2));
+        });
+
+        const featureCriteriaIndices = [2, 3, 4, 5];
+        featureCriteriaIndices.forEach(rowIndex => {
+          vendors.forEach((vendor, vendorIndex) => {
+            importedData["table-2"][rowIndex][vendorIndex + 2] = averageScores[vendor];
+          });
+        });
+      }
+
+      function autoScoreCost() {
+        const costData = importedData["table-5"];
+        const vendors = costData[0].slice(1);
+        let tcoValues = {};
+
+        costData[1].slice(1).forEach((val, index) => {
+          tcoValues[vendors[index]] = val ? parseFloat(String(val).replace(/[^0-9]/g, "")) : 0;
+        });
+
+        const validTcos = Object.values(tcoValues).filter(tco => tco > 0);
+        if (validTcos.length < 2) {
+          vendors.forEach((vendor, vendorIndex) => {
+            importedData["table-2"][11][vendorIndex + 2] = 0;
+          });
+          return;
+        }
+
+        const minTco = Math.min(...validTcos);
+        const maxTco = Math.max(...validTcos);
+        const scores = {};
+        vendors.forEach(vendor => {
+          const tco = tcoValues[vendor];
+          scores[vendor] = tco <= 0 ? 0 : (maxTco === minTco ? 10 : 10 * (1 - (tco - minTco) / (maxTco - minTco)));
+        });
+
+        const tcoRowIndex = 11;
+        vendors.forEach((vendor, vendorIndex) => {
+          importedData["table-2"][tcoRowIndex][vendorIndex + 2] = parseFloat(scores[vendor].toFixed(2));
+        });
+      }
+
+      // --- Table Population Functions ---
+      function populateChecklistTable() {
+        const table = document.getElementById("table-3");
+        const data = importedData["table-3"];
+        if (!table || !data) return;
+
+        let html = `<thead><tr>${data[0].map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>`;
+        const rows = data.slice(1);
+
+        for (let i = 0; i < rows.length; i++) {
+          const row = rows[i];
+          html += `<tr>`;
+          if (row[0] !== "") {
+            let rowspan = 1;
+            for (let j = i + 1; j < rows.length && rows[j][0] === ""; j++) {
+              rowspan++;
+            }
+            html += `<td rowspan="${rowspan}" class="font-bold align-middle bg-gray-50"><strong>${row[0]}</strong></td>`;
+          }
+          for (let k = 1; k < row.length; k++) {
+            html += `<td contenteditable="true">${row[k]}</td>`;
+          }
+          html += `</tr>`;
+        }
+        table.innerHTML = html + `</tbody>`;
+      }
+
+      function populateGenericTable(tableId, data, isEditable = true) {
+        const table = document.getElementById(tableId);
+        if (!table || !data) return;
+
+        let html = `<thead><tr>${data[0].map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>`;
+        data.slice(1).forEach(row => {
+          html += `<tr>${row.map((cell, index) => {
+            const editableAttr = isEditable ? ' contenteditable="true"' : "";
+            const cellContent = index === 0 ? `<strong>${cell}</strong>` : cell;
+            return `<td${editableAttr}>${cellContent}</td>`;
+          }).join("")}</tr>`;
+        });
+        table.innerHTML = html + "</tbody>";
+      }
+
+      function populateScoringTable() {
+        const table = document.getElementById("table-2");
+        const data = importedData["table-2"];
+        const vendors = importedData["table-1"][0].slice(1);
+        const vendorKeys = ["A", "B", "C", "D"];
+        if (!table || !data) return;
+
+        let headerHtml = `<tr><th rowspan="2" class="align-middle">Tiêu chí đánh giá</th><th rowspan="2" class="align-middle">Trọng số (%)</th>`;
+        vendors.forEach(vendor => {
+          headerHtml += `<th colspan="2" class="text-center">${vendor}</th>`;
+        });
+        headerHtml += `</tr><tr>${vendors.map(() => '<th class="text-center bg-blue-50">Điểm TB (/10)</th><th class="text-center bg-green-50">Điểm Trọng số</th>').join("")}</tr>`;
+
+        let bodyHtml = "";
+        const structureMap = [
+          { type: "group", key: "A", title: "A. TÍNH NĂNG & NGHIỆP VỤ" },
+          { type: "item", key: "A1", title: "1. Quản lý Yêu cầu mua hàng (PR)" },
+          { type: "item", key: "A2", title: "2. Cấu hình luồng phê duyệt" },
+          { type: "item", key: "A3", title: "3. Quản lý Đơn đặt hàng (PO) & NCC" },
+          { type: "item", key: "A4", title: "4. Báo cáo & Phân tích" },
+          { type: "group", key: "B", title: "B. CÔNG NGHỆ & TÍCH HỢP" },
+          { type: "item", key: "B1", title: "1. Khả năng tích hợp (ERP, Kế toán...)" },
+          { type: "item", key: "B2", title: "2. Bảo mật & Phân quyền" },
+          { type: "item", key: "B3", title: "3. Nền tảng & Khả năng mở rộng" },
+          { type: "group", key: "C", title: "C. CHI PHÍ" },
+          { type: "item", key: "C1", title: "1. Tổng chi phí sở hữu (TCO) 3 năm" },
+          { type: "item", key: "C2", title: "2. Mô hình định giá & sự minh bạch" },
+          { type: "group", key: "D", title: "D. HỖ TRỢ & TRIỂN KHAI" },
+          { type: "item", key: "D1", title: "1. Chất lượng hỗ trợ (SLA)" },
+          { type: "item", key: "D2", title: "2. Năng lực & Quy trình triển khai" },
+          { type: "total", key: "TOTAL", title: "TỔNG CỘNG" },
+        ];
+
+        const dataMap = {};
+        data.forEach(row => {
+          dataMap[row[0].trim()] = row;
+        });
+
+        structureMap.forEach(item => {
+          const rowData = dataMap[item.title];
+          if (!rowData) return;
+
+          if (item.type === "group") {
+            bodyHtml += `<tr class="bg-gray-100 font-bold"><td>${item.title}</td><td data-weight-group="${item.key}" contenteditable="true">${rowData[1]}</td>`;
+            vendorKeys.forEach(v => {
+              bodyHtml += `<td data-score-group-avg="${item.key}" data-vendor="${v}"></td><td data-score-group-weighted="${item.key}" data-vendor="${v}" class="bg-green-50"></td>`;
+            });
+            bodyHtml += "</tr>";
+          } else if (item.type === "item") {
+            bodyHtml += `<tr><td>${item.title}</td><td data-weight="${item.key}" contenteditable="true">${rowData[1]}</td>`;
+            vendorKeys.forEach((v, i) => {
+              bodyHtml += `<td data-score="${item.key}" data-vendor="${v}" contenteditable="true">${rowData[i + 2]}</td><td data-score-weighted="${item.key}" data-vendor="${v}"></td>`;
+            });
+            bodyHtml += "</tr>";
+          } else if (item.type === "total") {
+            bodyHtml += `<tr class="font-bold bg-yellow-100 text-lg"><td>${item.title}</td><td id="total-weight">${rowData[1]}</td>`;
+            vendorKeys.forEach(v => {
+              bodyHtml += `<td id="total-score-avg-${v}" class="bg-blue-100"></td><td id="total-score-weighted-${v}" class="bg-green-100"></td>`;
+            });
+            bodyHtml += "</tr>";
+          }
+        });
+        table.innerHTML = `<thead>${headerHtml}</thead><tbody>${bodyHtml}</tbody>`;
+      }
+
+      // --- Core Logic Functions ---
+      function getCellValue(selector) {
+        const element = document.querySelector(selector);
+        return element ? parseFloat(element.innerText.replace(/,/g, "")) || 0 : 0;
+      }
+
+      function getVendorNames() {
+        return importedData["table-1"][0].slice(1);
+      }
+
+      function calculateScores() {
+        const vendors = ["A", "B", "C", "D"];
+        const criteriaGroups = ["A", "B", "C", "D"];
+
+        criteriaGroups.forEach(group => {
+          vendors.forEach(vendor => {
+            let groupSubScoreTotal = 0;
+            let groupSubWeightTotal = 0;
+            document.querySelectorAll(`td[data-score][data-vendor="${vendor}"]`).forEach(cell => {
+              const scoreKey = cell.dataset.score;
+              if (scoreKey.startsWith(group)) {
+                const weight = getCellValue(`td[data-weight="${scoreKey}"]`);
+                const score = parseFloat(cell.innerText) || 0;
+                groupSubScoreTotal += score * weight;
+                groupSubWeightTotal += weight;
+              }
+            });
+            const groupAvgScore = groupSubWeightTotal > 0 ? groupSubScoreTotal / groupSubWeightTotal : 0;
+            const groupAvgCell = document.querySelector(`td[data-score-group-avg="${group}"][data-vendor="${vendor}"]`);
+            if (groupAvgCell) groupAvgCell.innerText = groupAvgScore.toFixed(2);
+          });
+        });
+
+        let totalWeight = 0;
+        document.querySelectorAll("td[data-weight-group]").forEach(cell => {
+          totalWeight += parseFloat(cell.innerText) || 0;
+        });
+        document.getElementById("total-weight").innerText = totalWeight;
+
+        let finalScores = {};
+        vendors.forEach(vendor => {
+          let finalVendorScore = 0;
+          criteriaGroups.forEach(group => {
+            const groupWeight = getCellValue(`td[data-weight-group="${group}"]`);
+            const groupAvgScore = getCellValue(`td[data-score-group-avg="${group}"][data-vendor="${vendor}"]`);
+            const groupWeightedScore = (groupAvgScore / 10) * groupWeight;
+            const groupWeightedCell = document.querySelector(`td[data-score-group-weighted="${group}"][data-vendor="${vendor}"]`);
+            if (groupWeightedCell) groupWeightedCell.innerText = groupWeightedScore.toFixed(2);
+            finalVendorScore += groupWeightedScore;
+          });
+
+          finalScores[vendor] = finalVendorScore;
+          const totalScoreAvgCell = document.getElementById(`total-score-avg-${vendor}`);
+          const totalScoreWeightedCell = document.getElementById(`total-score-weighted-${vendor}`);
+          if (totalScoreAvgCell) totalScoreAvgCell.innerText = (totalWeight > 0 ? (finalVendorScore / totalWeight) * 10 : 0).toFixed(2);
+          if (totalScoreWeightedCell) totalScoreWeightedCell.innerText = finalVendorScore.toFixed(2);
+        });
+        return finalScores;
+      }
+
+      function updateDashboard() {
+        const vendorNames = getVendorNames();
+        const vendorKeys = ["A", "B", "C", "D"];
+
+        Object.values(charts).forEach(chart => chart.destroy());
+
+        const groupScores = {};
+        vendorKeys.forEach(v => {
+          groupScores[v] = {
+            A: getCellValue(`td[data-score-group-avg="A"][data-vendor="${v}"]`),
+            B: getCellValue(`td[data-score-group-avg="B"][data-vendor="${v}"]`),
+            C: getCellValue(`td[data-score-group-avg="C"][data-vendor="${v}"]`),
+            D: getCellValue(`td[data-score-group-avg="D"][data-vendor="${v}"]`),
+          };
+        });
+
+        const totalScores = {};
+        vendorKeys.forEach(v => {
+          totalScores[v] = getCellValue(`#total-score-avg-${v}`);
+        });
+
+        const tcoData = {};
+        vendorKeys.forEach((v, i) => {
+          tcoData[v] = parseFloat(String(importedData["table-5"][1][i + 1]).replace(/[^0-9]/g, "")) || 0;
+        });
+
+        const summaryTable = document.getElementById("table-8");
+        if (summaryTable) {
+          const vendorData = vendorKeys
+            .map((key, index) => ({ name: vendorNames[index], score: totalScores[key], tco: tcoData[key] }))
+            .filter(v => v.score > 0)
+            .sort((a, b) => b.score - a.score);
+
+          let tableHtml = `<thead><tr><th>Xếp hạng</th><th>Nhà cung cấp</th><th>Tổng điểm (/10)</th><th>TCO 3 năm (VND)</th><th contenteditable="true">Ghi chú</th></tr></thead><tbody>`;
+          vendorData.forEach((vendor, index) => {
+            tableHtml += `<tr><td class="text-center font-bold">${index + 1}</td><td>${vendor.name}</td><td>${vendor.score.toFixed(2)}</td><td>${vendor.tco.toLocaleString("vi-VN")}</td><td contenteditable="true"></td></tr>`;
+          });
+          summaryTable.innerHTML = tableHtml + `</tbody>`;
+        }
+
+        const chartColors = ["#3b82f6", "#10b981", "#f97316", "#8b5cf6"];
+
+        charts.featureChart = new Chart(document.getElementById("featureChart").getContext("2d"), {
+          type: "bar",
+          data: {
+            labels: vendorNames,
+            datasets: [{ label: "Điểm Tính năng", data: vendorKeys.map(v => groupScores[v].A), backgroundColor: chartColors }],
+          },
+          options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 10 } } }
+        });
+
+        charts.techChart = new Chart(document.getElementById("techChart").getContext("2d"), {
+          type: "bar",
+          data: {
+            labels: vendorNames,
+            datasets: [{ label: "Điểm Công nghệ", data: vendorKeys.map(v => groupScores[v].B), backgroundColor: chartColors }],
+          },
+          options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 10 } } }
+        });
+
+        charts.costChart = new Chart(document.getElementById("costChart").getContext("2d"), {
+          type: "bar",
+          data: {
+            labels: vendorNames,
+            datasets: [{ label: "Điểm Chi phí", data: vendorKeys.map(v => groupScores[v].C), backgroundColor: chartColors }],
+          },
+          options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 10 } } }
+        });
+
+        charts.supportChart = new Chart(document.getElementById("supportChart").getContext("2d"), {
+          type: "bar",
+          data: {
+            labels: vendorNames,
+            datasets: [{ label: "Điểm Hỗ trợ", data: vendorKeys.map(v => groupScores[v].D), backgroundColor: chartColors }],
+          },
+          options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 10 } } }
+        });
+
+        charts.totalScoreChart = new Chart(document.getElementById("totalScoreChart").getContext("2d"), {
+          type: "bar",
+          data: {
+            labels: vendorNames,
+            datasets: [{ label: "Tổng điểm", data: vendorKeys.map(v => totalScores[v]), backgroundColor: chartColors }],
+          },
+          options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 10 } } }
+        });
+      }
+
+      // --- Initialization & Event Listeners ---
+      function loadAllData() {
+        autoScoreFeatures();
+        autoScoreCost();
+
+        populateGenericTable("table-1", importedData["table-1"], true);
+        populateScoringTable();
+        populateChecklistTable();
+        populateGenericTable("table-4", importedData["table-4"], true);
+        populateGenericTable("table-5", importedData["table-5"], true);
+        populateGenericTable("table-6", importedData["table-6"], true);
+        populateGenericTable("table-7", importedData["table-7"], true);
+        populateGenericTable("table-9", importedData["table-9"], true);
+
+        calculateScores();
+
+        document.getElementById("table-2").addEventListener("input", e => {
+          if (e.target && e.target.contentEditable === "true") {
+            calculateScores();
+          }
+        });
+      }
+
+      const tabs = document.querySelectorAll(".tab-btn");
+      const tabContainer = document.getElementById("tab-container");
+      const tabContents = tabContainer.querySelectorAll(".tab-content");
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          tabs.forEach(item => item.classList.remove("active"));
+          tabContents.forEach(content => content.classList.remove("active"));
+          tab.classList.add("active");
+          document.getElementById(tab.dataset.tab).classList.add("active");
+        });
+      });
+
+      document.getElementById("update-charts-btn").addEventListener("click", updateDashboard);
+
+      document.getElementById("export-btn").addEventListener("click", () => {
+        const wb = XLSX.utils.book_new();
+        const sheetNames = {
+          "table-0": "0_HuongDan",
+          "table-1": "1_ThongTinChung",
+          "table-2": "2_ChamDiem",
+          "table-3": "3_Checklist",
+          "table-4": "4_CongNghe",
+          "table-5": "5_ChiPhi",
+          "table-6": "6_HoTro",
+          "table-7": "7_RuiRo",
+          "table-8": "8_Dashboard_Summary",
+          "table-9": "9_SWOT",
+        };
+
+        document.querySelectorAll('[id^="table-"]').forEach(table => {
+          if (sheetNames[table.id]) {
+            const ws = XLSX.utils.table_to_sheet(table, { raw: true });
+            XLSX.utils.book_append_sheet(wb, ws, sheetNames[table.id]);
+          }
+        });
+        XLSX.writeFile(wb, "Bao_Cao_So_Sanh_NCC.xlsx");
+      });
+
+      loadAllData();
+    });
+  </script>
+</body>
+</html>

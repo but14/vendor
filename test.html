@@ -58,7 +58,9 @@
         border-radius: 0.75rem;
         background-color: #fff;
       }
-      .prose ol,
+      .prose ol {
+        margin-left: 1rem;
+      }
       .prose ul {
         margin-left: 1rem;
       }
@@ -66,7 +68,6 @@
   </head>
   <body class="bg-gray-50 text-gray-800 p-4 sm:p-6 md:p-8">
     <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-lg p-6">
-      <!-- Header Section -->
       <div
         class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6"
       >
@@ -100,7 +101,6 @@
         </button>
       </div>
 
-      <!-- Tabs Navigation -->
       <div class="border-b border-gray-200 mb-6">
         <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
           <button
@@ -166,9 +166,7 @@
         </nav>
       </div>
 
-      <!-- Tab Content -->
       <div id="tab-container" class="overflow-x-auto">
-        <!-- Tab 0: Instructions -->
         <div id="tab0" class="tab-content active prose max-w-none">
           <h3 class="font-semibold">0. Sử dụng và chú giải</h3>
           <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
@@ -183,9 +181,9 @@
                   >Bảng chấm điểm (Tab 2) được thiết kế lại để rõ ràng
                   hơn:</strong
                 >
-                Hiển thị "Điểm Trung bình" (thang 10) và "Đ Ascending"Điểm Trọng
-                số" (cho thấy đóng góp vào tổng điểm 100) cho từng hạng mục và
-                nhà cung cấp.
+                Hiển thị "Điểm Trung bình" (thang 10) và "Điểm Trọng số" (cho
+                thấy đóng góp vào tổng điểm 100) cho từng hạng mục và nhà cung
+                cấp.
               </li>
               <li>
                 <strong>Tự động hóa tính điểm:</strong>
@@ -220,9 +218,30 @@
             chọn nhà cung cấp giải pháp phê duyệt mua hàng điện tử một cách có
             hệ thống.
           </p>
+          <!-- <p><strong>Hướng dẫn sử dụng:</strong></p>
+          <ol class="list-decimal list-inside">
+            <li>
+              Dữ liệu từ các file Excel của bạn đã được nhập tự động. Các điểm
+              số ban đầu ở <strong>Tab 2</strong> cũng được tính tự động từ
+              <strong>Tab 3 (Tính năng)</strong> và
+              <strong>Tab 5 (Chi phí)</strong>.
+            </li>
+            <li>
+              Bạn có thể xem lại và
+              <strong>chỉnh sửa điểm trung bình</strong> (ô nền vàng) ở
+              <strong>Tab 2</strong> nếu cần. Mọi thay đổi sẽ được tự động tính
+              toán lại.
+            </li>
+            <li>
+              Chuyển đến tab <strong>8. Dashboard</strong>, nhấn nút "Cập nhật
+              Biểu đồ & Bảng" để xem dữ liệu được trực quan hóa.
+            </li>
+            <li>
+              Sau khi hoàn tất, nhấn nút "Xuất ra Excel" để tải về file báo cáo.
+            </li>
+          </ol> -->
         </div>
 
-        <!-- Tab 1: General Information -->
         <div id="tab1" class="tab-content">
           <h3 class="font-semibold mb-2">
             1. Thông tin chung về nhà cung cấp và giải pháp
@@ -230,27 +249,22 @@
           <table id="table-1" class="w-full text-sm"></table>
         </div>
 
-        <!-- Tab 2: Scoring -->
         <div id="tab2" class="tab-content">
           <h3 class="font-semibold mb-2">2. Bảng Chấm Điểm Chi Tiết</h3>
           <table id="table-2" class="w-full text-sm"></table>
         </div>
 
-        <!-- Tab 3: Feature Checklist -->
         <div id="tab3" class="tab-content">
           <h3 class="font-semibold mb-2">
             3. Danh mục kiểm tra tính năng chi tiết
           </h3>
           <table id="table-3" class="w-full text-sm"></table>
         </div>
-
-        <!-- Tab 4: Technology -->
         <div id="tab4" class="tab-content">
           <h3 class="font-semibold mb-2">4. Chi tiết về công nghệ</h3>
           <table id="table-4" class="w-full text-sm"></table>
         </div>
 
-        <!-- Tab 5: Cost -->
         <div id="tab5" class="tab-content">
           <h3 class="font-semibold mb-2">
             5. Chi tiết chi phí (ước tính trong 3 năm)
@@ -258,21 +272,17 @@
           <table id="table-5" class="w-full text-sm"></table>
         </div>
 
-        <!-- Tab 6: Support -->
         <div id="tab6" class="tab-content">
           <h3 class="font-semibold mb-2">
             6. Thông tin về hỗ trợ và triển khai
           </h3>
           <table id="table-6" class="w-full text-sm"></table>
         </div>
-
-        <!-- Tab 7: Risk -->
         <div id="tab7" class="tab-content">
           <h3 class="font-semibold mb-2">7. Đánh giá rủi ro tiềm ẩn</h3>
           <table id="table-7" class="w-full text-sm"></table>
         </div>
 
-        <!-- Tab 8: Dashboard -->
         <div id="tab8" class="tab-content">
           <div class="flex justify-between items-center mb-4">
             <h3 class="font-semibold text-xl">
@@ -290,7 +300,7 @@
               >
                 <path
                   fill-rule="evenodd"
-                  d="M15.312 11.424a5.5 5.5 0 01-9.201-4.46_5.5 5.5 0 011.643-1.644l.11-.112a.75.75 фил0 011.06 1.06l-.11.112a4 4 0 00-1.196 1.196 4.002 4.002 0 006.585 3.235l.233.233A5.5 5.5 0 0115.312 11.424zM18.75 13a.75.75 0 01-.75.75h-3.5a.75.75 0 010-1.5h2.323l-3.3-3.3a.75.75 0 111.06-1.06l3.3 3.3V8.5a.75.75 0 011.5 0v3.75c0 .414-.336.75-.75.75z"
+                  d="M15.312 11.424a5.5 5.5 0 01-9.201-4.46_5.5 5.5 0 011.643-1.644l.11-.112a.75.75 0 011.06 1.06l-.11.112a4 4 0 00-1.196 1.196 4.002 4.002 0 006.585 3.235l.233.233A5.5 5.5 0 0115.312 11.424zM18.75 13a.75.75 0 01-.75.75h-3.5a.75.75 0 010-1.5h2.323l-3.3-3.3a.75.75 0 111.06-1.06l3.3 3.3V8.5a.75.75 0 011.5 0v3.75c0 .414-.336.75-.75.75z"
                   clip-rule="evenodd"
                 />
               </svg>
@@ -300,6 +310,7 @@
           <p class="text-sm text-gray-500 mb-6">
             Dữ liệu đã được nhập. Nhấn nút này để xem kết quả phân tích.
           </p>
+
           <div class="space-y-8">
             <div class="chart-container">
               <h4 class="font-bold text-center mb-4">Bảng xếp hạng tổng thể</h4>
@@ -308,39 +319,26 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div class="chart-container">
                 <h4 class="font-bold text-center mb-2">
-                  So sánh Tính năng (Thang điểm 10)
-                </h4>
-                <canvas id="featureChart"></canvas>
-              </div>
-              <div class="chart-container">
-                <h4 class="font-bold text-center mb-2">
-                  So sánh Công nghệ (Thang điểm 10)
-                </h4>
-                <canvas id="techChart"></canvas>
-              </div>
-              <div class="chart-container">
-                <h4 class="font-bold text-center mb-2">
-                  So sánh Chi phí (Thang điểm 10)
-                </h4>
-                <canvas id="costChart"></canvas>
-              </div>
-              <div class="chart-container">
-                <h4 class="font-bold text-center mb-2">
-                  So sánh Hỗ trợ (Thang điểm 10)
-                </h4>
-                <canvas id="supportChart"></canvas>
-              </div>
-              <div class="chart-container col-span-2">
-                <h4 class="font-bold text-center mb-2">
                   Tổng điểm các Nhà cung cấp (Thang 10)
                 </h4>
                 <canvas id="totalScoreChart"></canvas>
               </div>
+              <div class="chart-container">
+                <h4 class="font-bold text-center mb-2">
+                  So sánh theo Nhóm tiêu chí (Thang 10)
+                </h4>
+                <canvas id="radarChart"></canvas>
+              </div>
+            </div>
+            <div class="chart-container">
+              <h4 class="font-bold text-center mb-2">
+                Ma trận Năng lực vs. Chi phí
+              </h4>
+              <canvas id="matrixChart"></canvas>
             </div>
           </div>
         </div>
 
-        <!-- Tab 9: SWOT -->
         <div id="tab9" class="tab-content">
           <h3 class="font-semibold mb-2">9. Phân tích SWOT</h3>
           <table id="table-9" class="w-full text-sm"></table>
@@ -641,7 +639,7 @@
             "Đáp ứng",
             "Đáp ứng",
             "Đáp ứng",
-            "Đáp ứng",
+            "Đap ứng",
           ],
           [
             "QUẢN LÝ ĐƠN ĐẶT HÀNG",
@@ -698,6 +696,7 @@
             "Chưa đáp ứng",
           ],
         ],
+
         "table-4": [
           ["Hạng mục", "Arito", "Diginet", "Ecount", "FPT"],
           [
@@ -731,6 +730,8 @@
         ],
         "table-5": [
           ["Khoản mục chi phí", "Arito", "Diginet", "Ecount", "FPT"],
+          // ["A. CHI PHÍ MỘT LẦN (ONE-TIME)"],
+          // ["1. Phí cài đặt, khởi tạo (Setup Fee)"],
           [
             "TỔNG CHI PHÍ SỞ HỮU (TCO)",
             "359.000.000 VND",
@@ -743,7 +744,7 @@
             "Bán giải pháp, sở hữu trọn đời. Đã bao gồm chi phí Customization.",
             "Bán giải pháp, sở hữu trọn đời. Đã bao gồm chi phí Customization.",
             "Cho thuê tính Phí/năm",
-            "Bên cung cấp chưa cung cấp thông tin chi tiết.",
+            "Bên cung câp chưa cung cấp thông tin chi tiết.",
           ],
         ],
         "table-6": [
@@ -785,7 +786,7 @@
           [
             "Rủi ro bảo mật",
             "Trung bình - cần kiểm tra kỹ lưỡng về tiêu chuẩn bảo mật, cấu hình triển khai",
-            "Trung bình - cần kiểm tra kỹ lưỡng về tiêu chuẩn bảo mật, cấu hình triển khai",
+            "Trung bình - cần kiểm tra kỹ lý về tiêu chuần bảo mật, cấu hình triển khai",
             "Cao - lưu dữ liệu tại Cloud nước ngoài",
             "Trung bình - cần kiểm tra kỹ lưỡng về tiêu chuẩn bảo mật, cấu hình triển khai",
           ],
@@ -823,10 +824,13 @@
         ],
       };
 
-      document.addEventListener("DOMContentLoaded", () => {
+      document.addEventListener("DOMContentLoaded", function () {
+        // --- START OF NEW SCRIPT LOGIC ---
+
         let charts = {};
 
-        // --- Auto-Scoring Functions ---
+        // --- AUTO-SCORING FUNCTIONS ---
+
         function autoScoreFeatures() {
           const featureData = importedData["table-3"].slice(1);
           const vendors = ["Arito", "Diginet", "Ecount", "FPT"];
@@ -841,7 +845,7 @@
 
           featureData.forEach((row) => {
             vendors.forEach((vendor, index) => {
-              const status = row[index + 3];
+              const status = row[index + 3]; // Vendor columns start at index 3
               vendorScores[vendor].push(
                 scoreMap[status] !== undefined ? scoreMap[status] : 0
               );
@@ -852,12 +856,12 @@
           vendors.forEach((vendor) => {
             const scores = vendorScores[vendor];
             const total = scores.reduce((sum, score) => sum + score, 0);
-            averageScores[vendor] = parseFloat(
-              (scores.length > 0 ? total / scores.length : 0).toFixed(2)
-            );
+            const avg = scores.length > 0 ? total / scores.length : 0;
+            averageScores[vendor] = parseFloat(avg.toFixed(2));
           });
 
-          const featureCriteriaIndices = [2, 3, 4, 5];
+          // Update scores in table-2 data for all feature-related criteria (section A)
+          const featureCriteriaIndices = [2, 3, 4, 5]; // Row indices for A1, A2, A3, A4
           featureCriteriaIndices.forEach((rowIndex) => {
             vendors.forEach((vendor, vendorIndex) => {
               importedData["table-2"][rowIndex][vendorIndex + 2] =
@@ -871,14 +875,26 @@
           const vendors = costData[0].slice(1);
           let tcoValues = {};
 
+          // Clean up TCO data and prepare it for calculation
           costData[1].slice(1).forEach((val, index) => {
-            tcoValues[vendors[index]] = val
+            const cleanVal = val
               ? parseFloat(String(val).replace(/[^0-9]/g, ""))
               : 0;
+            tcoValues[vendors[index]] = cleanVal;
           });
+
+          // const ecountNote = costData[2][3];
+          // if (ecountNote.includes("Phí/năm")) {
+          //   tcoValues["Ecount"] =
+          //     (parseFloat(String(costData[1][3]).replace(/[^0-9]/g, "")) || 0) *
+          //     3;
+          //   importedData["table-5"][1][3] =
+          //     tcoValues["Ecount"].toLocaleString("vi-VN") + " VND"; // Thêm lại chữ VND
+          // }
 
           const validTcos = Object.values(tcoValues).filter((tco) => tco > 0);
           if (validTcos.length < 2) {
+            // Cannot compare with less than 2 vendors
             vendors.forEach((vendor, vendorIndex) => {
               importedData["table-2"][11][vendorIndex + 2] = 0;
             });
@@ -887,17 +903,20 @@
 
           const minTco = Math.min(...validTcos);
           const maxTco = Math.max(...validTcos);
+
           const scores = {};
           vendors.forEach((vendor) => {
             const tco = tcoValues[vendor];
-            scores[vendor] =
-              tco <= 0
-                ? 0
-                : maxTco === minTco
-                ? 10
-                : 10 * (1 - (tco - minTco) / (maxTco - minTco));
+            if (tco <= 0) {
+              scores[vendor] = 0;
+            } else if (maxTco === minTco) {
+              scores[vendor] = 10;
+            } else {
+              scores[vendor] = 10 * (1 - (tco - minTco) / (maxTco - minTco));
+            }
           });
 
+          // Update TCO score (C.1) in table-2 data
           const tcoRowIndex = 11;
           vendors.forEach((vendor, vendorIndex) => {
             importedData["table-2"][tcoRowIndex][vendorIndex + 2] = parseFloat(
@@ -906,7 +925,8 @@
           });
         }
 
-        // --- Table Population Functions ---
+        // --- TABLE POPULATION FUNCTIONS ---
+
         function populateChecklistTable() {
           const table = document.getElementById("table-3");
           const data = importedData["table-3"];
@@ -922,8 +942,9 @@
             html += `<tr>`;
             if (row[0] !== "") {
               let rowspan = 1;
-              for (let j = i + 1; j < rows.length && rows[j][0] === ""; j++) {
-                rowspan++;
+              for (let j = i + 1; j < rows.length; j++) {
+                if (rows[j][0] === "") rowspan++;
+                else break;
               }
               html += `<td rowspan="${rowspan}" class="font-bold align-middle bg-gray-50"><strong>${row[0]}</strong></td>`;
             }
@@ -932,7 +953,8 @@
             }
             html += `</tr>`;
           }
-          table.innerHTML = html + `</tbody>`;
+          html += `</tbody>`;
+          table.innerHTML = html;
         }
 
         function populateGenericTable(tableId, data, isEditable = true) {
@@ -954,27 +976,31 @@
               })
               .join("")}</tr>`;
           });
-          table.innerHTML = html + "</tbody>";
+          html += "</tbody>";
+          table.innerHTML = html;
         }
 
         function populateScoringTable() {
           const table = document.getElementById("table-2");
           const data = importedData["table-2"];
-          const vendors = importedData["table-1"][0].slice(1);
+          const vendors = importedData["table-1"][0].slice(1); // ["Arito", "Diginet", "Ecount", "FPT"]
           const vendorKeys = ["A", "B", "C", "D"];
           if (!table || !data) return;
 
-          let headerHtml = `<tr><th rowspan="2" class="align-middle">Tiêu chí đánh giá</th><th rowspan="2" class="align-middle">Trọng số (%)</th>`;
+          // Build Header
+          let headerHtml =
+            '<tr><th rowspan="2" class="align-middle">Tiêu chí đánh giá</th><th rowspan="2" class="align-middle">Trọng số (%)</th>';
           vendors.forEach((vendor) => {
             headerHtml += `<th colspan="2" class="text-center">${vendor}</th>`;
           });
-          headerHtml += `</tr><tr>${vendors
-            .map(
-              () =>
-                '<th class="text-center bg-blue-50">Điểm TB (/10)</th><th class="text-center bg-green-50">Điểm Trọng số</th>'
-            )
-            .join("")}</tr>`;
+          headerHtml += "</tr><tr>";
+          vendors.forEach(() => {
+            headerHtml +=
+              '<th class="text-center bg-blue-50">Điểm TB (/10)</th><th class="text-center bg-green-50">Điểm Trọng số</th>';
+          });
+          headerHtml += "</tr>";
 
+          // Build Body
           let bodyHtml = "";
           const structureMap = [
             { type: "group", key: "A", title: "A. TÍNH NĂNG & NGHIỆP VỤ" },
@@ -1034,8 +1060,9 @@
 
             if (item.type === "group") {
               bodyHtml += `<tr class="bg-gray-100 font-bold"><td>${item.title}</td><td data-weight-group="${item.key}" contenteditable="true">${rowData[1]}</td>`;
-              vendorKeys.forEach((v) => {
-                bodyHtml += `<td data-score-group-avg="${item.key}" data-vendor="${v}"></td><td data-score-group-weighted="${item.key}" data-vendor="${v}" class="bg-green-50"></td>`;
+              vendorKeys.forEach((v, i) => {
+                bodyHtml += `<td data-score-group-avg="${item.key}" data-vendor="${v}"></td>`; // Avg Score
+                bodyHtml += `<td data-score-group-weighted="${item.key}" data-vendor="${v}" class="bg-green-50"></td>`; // Weighted Score
               });
               bodyHtml += "</tr>";
             } else if (item.type === "item") {
@@ -1045,15 +1072,15 @@
                   item.key
                 }" data-vendor="${v}" contenteditable="true">${
                   rowData[i + 2]
-                }</td><td data-score-weighted="${
-                  item.key
-                }" data-vendor="${v}"></td>`;
+                }</td>`; // Avg Score (editable)
+                bodyHtml += `<td data-score-weighted="${item.key}" data-vendor="${v}"></td>`; // Weighted Score (read-only)
               });
               bodyHtml += "</tr>";
             } else if (item.type === "total") {
               bodyHtml += `<tr class="font-bold bg-yellow-100 text-lg"><td>${item.title}</td><td id="total-weight">${rowData[1]}</td>`;
               vendorKeys.forEach((v) => {
-                bodyHtml += `<td id="total-score-avg-${v}" class="bg-blue-100"></td><td id="total-score-weighted-${v}" class="bg-green-100"></td>`;
+                bodyHtml += `<td id="total-score-avg-${v}" class="bg-blue-100"></td>`; // Final Avg Score /10
+                bodyHtml += `<td id="total-score-weighted-${v}" class="bg-green-100"></td>`; // Final Weighted Score /100
               });
               bodyHtml += "</tr>";
             }
@@ -1061,7 +1088,8 @@
           table.innerHTML = `<thead>${headerHtml}</thead><tbody>${bodyHtml}</tbody>`;
         }
 
-        // --- Core Logic Functions ---
+        // --- CORE LOGIC FUNCTIONS ---
+
         function getCellValue(selector) {
           const element = document.querySelector(selector);
           return element
@@ -1077,6 +1105,7 @@
           const vendors = ["A", "B", "C", "D"];
           const criteriaGroups = ["A", "B", "C", "D"];
 
+          // Recalculate group average scores based on item scores
           criteriaGroups.forEach((group) => {
             vendors.forEach((vendor) => {
               let groupSubScoreTotal = 0;
@@ -1106,12 +1135,14 @@
             });
           });
 
+          // Calculate total weight
           let totalWeight = 0;
           document.querySelectorAll("td[data-weight-group]").forEach((cell) => {
             totalWeight += parseFloat(cell.innerText) || 0;
           });
           document.getElementById("total-weight").innerText = totalWeight;
 
+          // Calculate weighted scores for groups and final total
           let finalScores = {};
           vendors.forEach((vendor) => {
             let finalVendorScore = 0;
@@ -1138,6 +1169,7 @@
             const totalScoreWeightedCell = document.getElementById(
               `total-score-weighted-${vendor}`
             );
+
             if (totalScoreAvgCell)
               totalScoreAvgCell.innerText = (
                 totalWeight > 0 ? (finalVendorScore / totalWeight) * 10 : 0
@@ -1152,7 +1184,14 @@
           const vendorNames = getVendorNames();
           const vendorKeys = ["A", "B", "C", "D"];
 
+          // Destroy existing charts to prevent duplicates
           Object.values(charts).forEach((chart) => chart.destroy());
+
+          // Get data for charts
+          const totalScores = {};
+          vendorKeys.forEach((v) => {
+            totalScores[v] = getCellValue(`#total-score-avg-${v}`);
+          });
 
           const groupScores = {};
           vendorKeys.forEach((v) => {
@@ -1172,11 +1211,6 @@
             };
           });
 
-          const totalScores = {};
-          vendorKeys.forEach((v) => {
-            totalScores[v] = getCellValue(`#total-score-avg-${v}`);
-          });
-
           const tcoData = {};
           vendorKeys.forEach((v, i) => {
             tcoData[v] =
@@ -1185,6 +1219,7 @@
               ) || 0;
           });
 
+          // --- Update Summary Table ---
           const summaryTable = document.getElementById("table-8");
           if (summaryTable) {
             const vendorData = vendorKeys
@@ -1198,135 +1233,128 @@
 
             let tableHtml = `<thead><tr><th>Xếp hạng</th><th>Nhà cung cấp</th><th>Tổng điểm (/10)</th><th>TCO 3 năm (VND)</th><th contenteditable="true">Ghi chú</th></tr></thead><tbody>`;
             vendorData.forEach((vendor, index) => {
-              tableHtml += `<tr><td class="text-center font-bold">${
-                index + 1
-              }</td><td>${vendor.name}</td><td>${vendor.score.toFixed(
-                2
-              )}</td><td>${vendor.tco.toLocaleString(
-                "vi-VN"
-              )}</td><td contenteditable="true"></td></tr>`;
+              tableHtml += `
+                    <tr>
+                        <td class="text-center font-bold">${index + 1}</td>
+                        <td>${vendor.name}</td>
+                        <td>${vendor.score.toFixed(2)}</td>
+                        <td>${vendor.tco.toLocaleString("vi-VN")}</td>
+                        <td contenteditable="true"></td>
+                    </tr>`;
             });
-            summaryTable.innerHTML = tableHtml + `</tbody>`;
+            tableHtml += `</tbody>`;
+            summaryTable.innerHTML = tableHtml;
           }
 
+          // --- Render Charts ---
           const chartColors = ["#3b82f6", "#10b981", "#f97316", "#8b5cf6"];
+          const chartColorsRgba = [
+            "rgba(59, 130, 246, 0.2)",
+            "rgba(16, 185, 129, 0.2)",
+            "rgba(249, 115, 22, 0.2)",
+            "rgba(139, 92, 246, 0.2)",
+          ];
 
-          charts.featureChart = new Chart(
-            document.getElementById("featureChart").getContext("2d"),
-            {
-              type: "bar",
-              data: {
-                labels: vendorNames,
-                datasets: [
-                  {
-                    label: "Điểm Tính năng",
-                    data: vendorKeys.map((v) => groupScores[v].A),
-                    backgroundColor: chartColors,
-                  },
-                ],
-              },
-              options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, max: 10 } },
-              },
-            }
-          );
+          const totalScoreCtx = document
+            .getElementById("totalScoreChart")
+            .getContext("2d");
+          charts.totalScore = new Chart(totalScoreCtx, {
+            type: "bar",
+            data: {
+              labels: vendorNames.filter(
+                (_, i) => totalScores[vendorKeys[i]] > 0
+              ),
+              datasets: [
+                {
+                  label: "Tổng điểm",
+                  data: vendorKeys
+                    .map((v) => totalScores[v])
+                    .filter((s) => s > 0),
+                  backgroundColor: chartColors,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: { legend: { display: false } },
+              scales: { y: { beginAtZero: true, max: 10 } },
+            },
+          });
 
-          charts.techChart = new Chart(
-            document.getElementById("techChart").getContext("2d"),
-            {
-              type: "bar",
-              data: {
-                labels: vendorNames,
-                datasets: [
-                  {
-                    label: "Điểm Công nghệ",
-                    data: vendorKeys.map((v) => groupScores[v].B),
-                    backgroundColor: chartColors,
-                  },
-                ],
-              },
-              options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, max: 10 } },
-              },
-            }
-          );
+          const radarCtx = document
+            .getElementById("radarChart")
+            .getContext("2d");
+          charts.radar = new Chart(radarCtx, {
+            type: "radar",
+            data: {
+              labels: ["Tính năng", "Công nghệ", "Chi phí", "Hỗ trợ"],
+              datasets: vendorKeys
+                .map((vendor, index) => ({
+                  label: vendorNames[index],
+                  data: Object.values(groupScores[vendor]),
+                  fill: true,
+                  backgroundColor: chartColorsRgba[index],
+                  borderColor: chartColors[index],
+                  pointBackgroundColor: chartColors[index],
+                }))
+                .filter((d) => d.data.some((val) => val > 0)),
+            },
+            options: {
+              responsive: true,
+              elements: { line: { tension: 0, borderWidth: 3 } },
+              scales: { r: { beginAtZero: true, max: 10 } },
+            },
+          });
 
-          charts.costChart = new Chart(
-            document.getElementById("costChart").getContext("2d"),
-            {
-              type: "bar",
-              data: {
-                labels: vendorNames,
-                datasets: [
-                  {
-                    label: "Điểm Chi phí",
-                    data: vendorKeys.map((v) => groupScores[v].C),
-                    backgroundColor: chartColors,
+          const matrixCtx = document
+            .getElementById("matrixChart")
+            .getContext("2d");
+          charts.matrix = new Chart(matrixCtx, {
+            type: "scatter",
+            data: {
+              datasets: vendorKeys
+                .map((vendor, index) => ({
+                  label: vendorNames[index],
+                  data: [{ x: tcoData[vendor], y: totalScores[vendor] }],
+                  backgroundColor: chartColors[index],
+                  pointRadius: 10,
+                  pointHoverRadius: 15,
+                }))
+                .filter((d) => d.data[0].y > 0),
+            },
+            options: {
+              responsive: true,
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: "Tổng chi phí sở hữu 3 năm (VND)",
                   },
-                ],
-              },
-              options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, max: 10 } },
-              },
-            }
-          );
-
-          charts.supportChart = new Chart(
-            document.getElementById("supportChart").getContext("2d"),
-            {
-              type: "bar",
-              data: {
-                labels: vendorNames,
-                datasets: [
-                  {
-                    label: "Điểm Hỗ trợ",
-                    data: vendorKeys.map((v) => groupScores[v].D),
-                    backgroundColor: chartColors,
+                  ticks: {
+                    callback: (value) =>
+                      value > 0
+                        ? new Intl.NumberFormat("vi-VN").format(value)
+                        : "",
                   },
-                ],
+                },
+                y: {
+                  title: { display: true, text: "Tổng điểm Năng lực (/10)" },
+                  beginAtZero: true,
+                  max: 10,
+                },
               },
-              options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, max: 10 } },
-              },
-            }
-          );
-
-          charts.totalScoreChart = new Chart(
-            document.getElementById("totalScoreChart").getContext("2d"),
-            {
-              type: "bar",
-              data: {
-                labels: vendorNames,
-                datasets: [
-                  {
-                    label: "Tổng điểm",
-                    data: vendorKeys.map((v) => totalScores[v]),
-                    backgroundColor: chartColors,
-                  },
-                ],
-              },
-              options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, max: 10 } },
-              },
-            }
-          );
+            },
+          });
         }
 
-        // --- Initialization & Event Listeners ---
+        // --- INITIALIZATION & EVENT LISTENERS ---
+
         function loadAllData() {
+          // Run auto-scoring first to update the data object
           autoScoreFeatures();
           autoScoreCost();
 
+          // Populate all tables
           populateGenericTable("table-1", importedData["table-1"], true);
           populateScoringTable();
           populateChecklistTable();
@@ -1336,13 +1364,17 @@
           populateGenericTable("table-7", importedData["table-7"], true);
           populateGenericTable("table-9", importedData["table-9"], true);
 
+          // Perform initial calculation
           calculateScores();
 
-          document.getElementById("table-2").addEventListener("input", (e) => {
-            if (e.target && e.target.contentEditable === "true") {
-              calculateScores();
-            }
-          });
+          // Add event listener for score changes
+          document
+            .getElementById("table-2")
+            .addEventListener("input", function (e) {
+              if (e.target && e.target.contentEditable === "true") {
+                calculateScores();
+              }
+            });
         }
 
         const tabs = document.querySelectorAll(".tab-btn");
@@ -1364,30 +1396,33 @@
           .getElementById("update-charts-btn")
           .addEventListener("click", updateDashboard);
 
-        document.getElementById("export-btn").addEventListener("click", () => {
-          const wb = XLSX.utils.book_new();
-          const sheetNames = {
-            "table-0": "0_HuongDan",
-            "table-1": "1_ThongTinChung",
-            "table-2": "2_ChamDiem",
-            "table-3": "3_Checklist",
-            "table-4": "4_CongNghe",
-            "table-5": "5_ChiPhi",
-            "table-6": "6_HoTro",
-            "table-7": "7_RuiRo",
-            "table-8": "8_Dashboard_Summary",
-            "table-9": "9_SWOT",
-          };
+        document
+          .getElementById("export-btn")
+          .addEventListener("click", function () {
+            const wb = XLSX.utils.book_new();
+            const sheetNames = {
+              "table-0": "0_HuongDan",
+              "table-1": "1_ThongTinChung",
+              "table-2": "2_ChamDiem",
+              "table-3": "3_Checklist",
+              "table-4": "4_CongNghe",
+              "table-5": "5_ChiPhi",
+              "table-6": "6_HoTro",
+              "table-7": "7_RuiRo",
+              "table-8": "8_Dashboard_Summary",
+              "table-9": "9_SWOT",
+            };
 
-          document.querySelectorAll('[id^="table-"]').forEach((table) => {
-            if (sheetNames[table.id]) {
-              const ws = XLSX.utils.table_to_sheet(table, { raw: true });
-              XLSX.utils.book_append_sheet(wb, ws, sheetNames[table.id]);
-            }
+            document.querySelectorAll('[id^="table-"]').forEach((table) => {
+              if (sheetNames[table.id]) {
+                const ws = XLSX.utils.table_to_sheet(table, { raw: true });
+                XLSX.utils.book_append_sheet(wb, ws, sheetNames[table.id]);
+              }
+            });
+            XLSX.writeFile(wb, "Bao_Cao_So_Sanh_NCC.xlsx");
           });
-          XLSX.writeFile(wb, "Bao_Cao_So_Sanh_NCC.xlsx");
-        });
 
+        // Initial load
         loadAllData();
       });
     </script>
